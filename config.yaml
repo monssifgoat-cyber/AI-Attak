@@ -1,0 +1,25 @@
+# إعدادات فحص اختبار الاختراق المصرّح به
+# ⚠️ عدّل هذه القيم فقط داخل نطاق العميل المتفق عليه
+
+scope:
+  targets:                     # ضع هنا نطاق العميل فقط
+    - "https://staging.example.com"
+  allowed_ports: [80, 443, 8080, 8443]
+  max_threads: 20
+  rate_limit: "50/s"           # لا تُثقّل على الخادم
+
+llm:
+  provider: "ollama"           # ollama أو gemini (ollama يبقي بيانات العميل محلية)
+  ollama_url: "http://localhost:11434"
+  model: "qwen2.5:14b"         # نموذج قوي للتحليل والتقرير
+  gemini_api_key: ""           # إن اخترت gemini
+
+stages:
+  recon:    true
+  scan:     true
+  exploit:  true              # استغلال كامل — النسخة المصرّح بها فقط
+  report:   true
+
+exploit:
+  destructive: false           # لا حذف/تشفير بيانات حتى في النسخة
+  max_privilege: "root/shell"  # الهدف: قشرة كاملة أو صلاحيات قصوى
